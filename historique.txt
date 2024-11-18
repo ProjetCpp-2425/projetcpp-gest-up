@@ -1,0 +1,78 @@
+Historique de Ajout:
+
+[Mon. Nov 18 01:05:47] - L'utilisateur a ajouté une transaction avec Mode paiement:Virement Type:Depense Categorie:Vente materiel montant:1
+
+[Mon. Nov 18 00:59:11] - L'utilisateur a ajouté une transaction avec Mode paiement:Virement Type:Depense Categorie:Autre depenses montant:1245
+
+[Mon. Nov 18 00:19:17] - L'utilisateur a ajouté une transaction avec Mode paiement:Virement Type:Revenue Categorie:Vente materiel montant:134
+
+[Mon. Nov 18 00:19:00] - L'utilisateur a ajouté une transaction avec Mode paiement:Virement Type:Revenue Categorie:Autre revenues montant:134
+
+[Mon. Nov 18 00:18:24] - L'utilisateur a ajouté une transaction avec Mode paiement:Virement Type:Revenue Categorie:Payement employer montant:112
+
+[Sun. Nov 17 18:12:39] - L'utilisateur a ajouté une transaction avec Mode paiement:Virement Type:Revenue Categorie:Vente materiel montant:11112
+
+[Sun. Nov 17 18:05:45] - L'utilisateur a ajouté une transaction avec Mode paiement:Virement Type:Depense Categorie:Vente materiel montant:111111
+
+[Sun. Nov 17 17:24:30] - L'utilisateur a ajouté une transaction avec Mode paiement:Virement Type:Depense Categorie:Vente materiel montant:21
+
+Historique de Modification:
+
+[Mon. Nov 18 01:15:20] - L'utilisateur a modifié la transaction n°19 pour devenir Mode paiement:Virement Type:Depense Categorie:Vente materiel montant:21
+
+[Mon. Nov 18 01:13:04] - L'utilisateur a modifié la transaction n°18 pour devenir Mode paiement:Cheque Type:Depense Categorie:Payement employer montant:11111
+
+[Sun. Nov 17 18:09:29] - L'utilisateur a modifié la transaction n°18 pour devenir Mode paiement:Cheque Type:Depense Categorie:Payement employer montant:11111
+
+[Sun. Nov 17 18:09:14] - L'utilisateur a modifié la transaction n°17 pour devenir Mode paiement:Virement Type:Revenue Categorie:Vente materiel montant:111
+
+[Sun. Nov 17 13:04:24] - L'utilisateur a modifié la transaction n°17 pour devenir Mode paiement:Virement Type:Revenue Categorie:Vente materiel montant:20
+
+[Sun. Nov 17 12:37:03] - L'utilisateur a modifié la transaction n°15 pour devenir Mode paiement:Cheque Type:Depense Categorie:Autre revenues montant:300
+
+Historique de Suppression:
+
+[Mon. Nov 18 01:11:56] - L'utilisateur a supprimé la transaction n°24
+
+[Mon. Nov 18 01:11:44] - L'utilisateur a supprimé la transaction n°17
+
+[Mon. Nov 18 01:08:49] - L'utilisateur a supprimé la transaction n°22
+
+[Mon. Nov 18 01:07:43] - L'utilisateur a supprimé la transaction n°23
+
+[Mon. Nov 18 01:06:54] - L'utilisateur a supprimé la transaction n°26
+
+[Sun. Nov 17 18:15:05] - L'utilisateur a supprimé la transaction n°21
+
+[Sun. Nov 17 18:08:46] - L'utilisateur a supprimé la transaction n°16
+
+[Sun. Nov 17 18:08:31] - L'utilisateur a supprimé la transaction n°20
+
+[Sun. Nov 17 17:25:10] - L'utilisateur a supprimé la transaction n°15
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
