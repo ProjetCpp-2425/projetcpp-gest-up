@@ -10,17 +10,19 @@ QT += charts
 QT += widgets charts
 QT += core gui widgets charts
 QT += network
+QT += serialport
+QT       += core gui serialport
 
 SOURCES += qrcodegen.cpp \
     loginwindow.cpp
-HEADERS += qrcodegen.hpp \
+    HEADERS += qrcodegen.hpp \
     loginwindow.h
-QT += core gui widgets
+    QT += core gui widgets
 
 
 
 
-
+CONFIG += c++17
 
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -46,11 +48,9 @@ SOURCES += \
         mainwindow.cpp \
     connection.cpp
 
-
 HEADERS += \
         mainwindow.h \
     connection.h
-
 
 FORMS += \
         loginwindow.ui \

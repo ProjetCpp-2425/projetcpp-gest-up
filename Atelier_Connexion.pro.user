@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 7.0.0, 2024-11-25T14:23:32. -->
+<!-- Written by QtCreator 7.0.0, 2024-12-01T22:11:01. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -240,9 +240,8 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Atelier_Connexion2</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/admin/Downloads/Atelier_Connexion_arslen/Atelier_Connexion/Atelier_Connexion.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">C:/Users/admin/Downloads/Atelier_Connexion_arslen/Atelier_Connexion/Atelier_Connexion.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/admin/Downloads/Atelier_Connexion_arslen/Atelier_Connexion/smart-conservation-company-2A30/Atelier_Connexion.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">C:/Users/admin/Downloads/Atelier_Connexion_arslen/Atelier_Connexion/smart-conservation-company-2A30/Atelier_Connexion.pro</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
