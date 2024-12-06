@@ -1,128 +1,121 @@
 #include "loginwindow.h"
+#include "ui_loginwindow.h"
 #include <QMessageBox>
-#include <QSerialPort>
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QDebug>
 
 LoginWindow::LoginWindow(QWidget *parent) :
-    QWidget(parent), serialPort(new QSerialPort(this))
+    QWidget(parent),
+    ui(new Ui::LoginWindow),
+    serialPort(new QSerialPort(this))
 {
-    ui.setupUi(this);  // Initialise l'interface générée par Qt Designer
+    ui->setupUi(this); // Charger l'interface utilisateur
 
-    // Par défaut, le mot de passe est masqué
-    ui.passwordLineEdit->setEchoMode(QLineEdit::Password);
+    // Masquer le mot de passe par défaut
+    ui->passwordLineEdit->setEchoMode(QLineEdit::Password);
 
-    // Connexion du bouton pour basculer la visibilité du mot de passe
-    connect(ui.togglePasswordButton, &QPushButton::clicked, this, &LoginWindow::togglePasswordVisibility);
-
-    // Connexion du bouton de connexion
-    connect(ui.loginButton, &QPushButton::clicked, this, &LoginWindow::onLoginClicked);
-
-    // Initialisation du port série pour le lecteur RFID
+    // Connexions des signaux/slots
+    connect(ui->togglePasswordButton, &QPushButton::clicked, this, &LoginWindow::togglePasswordVisibility);
+    connect(ui->loginButton, &QPushButton::clicked, this, &LoginWindow::onLoginClicked);
     connect(serialPort, &QSerialPort::readyRead, this, &LoginWindow::onDataReceived);
 
-    // Configuration du port série (COM7)
-    serialPort->setPortName("COM7");  // Utiliser COM7, à adapter si nécessaire
+    // Initialisation du port série
+    serialPort->setPortName("COM7"); // Remplacez par votre port série
     serialPort->setBaudRate(QSerialPort::Baud9600);
     serialPort->setDataBits(QSerialPort::Data8);
     serialPort->setParity(QSerialPort::NoParity);
     serialPort->setStopBits(QSerialPort::OneStop);
     serialPort->setFlowControl(QSerialPort::NoFlowControl);
 
-    // Essayer d'ouvrir le port série
-    if (!serialPort->open(QIODevice::ReadOnly)) {
-        // Si l'ouverture échoue, afficher le code d'erreur
-        QMessageBox::critical(this, "Erreur", "Impossible d'ouvrir le port série COM7.\nCode d'erreur : " + QString::number(serialPort->error()));
+    if (!serialPort->open(QIODevice::ReadWrite)) {
+        QMessageBox::critical(this, "Erreur", "Impossible d'ouvrir le port série COM7.");
     }
+
 }
 
 LoginWindow::~LoginWindow() {
+    delete ui;
+
     if (serialPort->isOpen()) {
         serialPort->close();
     }
 }
 
-void LoginWindow::onLoginClicked() {
-    // Code pour le login traditionnel (nom d'utilisateur et mot de passe) si nécessaire
-    QString username = ui.usernameLineEdit->text();
-    QString password = ui.passwordLineEdit->text();
+void LoginWindow::connectToDatabase() {
+    db = QSqlDatabase::addDatabase("QODBC");
+    db.setDatabaseName("nom_de_votre_source_odbc"); // Remplacez par votre source ODBC
+    db.setUserName("votre_utilisateur");
+    db.setPassword("votre_mot_de_passe");
 
-    if(username == "a" && password == "a") {
-        emit loginSuccessful();  // Emettre un signal de succès
-        close();  // Fermer la fenêtre de connexion
+    if (!db.open()) {
+        QMessageBox::critical(this, "Erreur", "Impossible de se connecter à la base de données.\n" + db.lastError().text());
+    }
+}
+
+void LoginWindow::onLoginClicked() {
+    QString username = ui->usernameLineEdit->text();
+    QString password = ui->passwordLineEdit->text();
+
+    QSqlQuery query;
+    query.prepare("SELECT * FROM EMPLOYES WHERE USERNAME = :username AND PASSWORD = :password");
+    query.bindValue(":username", username);
+    query.bindValue(":password", password);
+
+    if (query.exec() && query.next()) {
+        emit loginSuccessful(); // Connexion réussie
+        close(); // Fermer la fenêtre de connexion
     } else {
-        QMessageBox::critical(this, "Login Failed", "Incorrect username or password.");
+        QMessageBox::critical(this, "Erreur", "Nom d'utilisateur ou mot de passe incorrect.");
     }
 }
 
 void LoginWindow::togglePasswordVisibility() {
-    // Vérifier si le mot de passe est actuellement masqué ou visible
-    if (ui.passwordLineEdit->echoMode() == QLineEdit::Password) {
-        ui.passwordLineEdit->setEchoMode(QLineEdit::Normal);  // Rendre le mot de passe visible
+    if (ui->passwordLineEdit->echoMode() == QLineEdit::Password) {
+        ui->passwordLineEdit->setEchoMode(QLineEdit::Normal);
     } else {
-        ui.passwordLineEdit->setEchoMode(QLineEdit::Password);  // Masquer le mot de passe
+        ui->passwordLineEdit->setEchoMode(QLineEdit::Password);
     }
 }
 
 void LoginWindow::onDataReceived() {
-    // Lire toutes les données disponibles dans le tampon
-    QByteArray data = serialPort->readAll();
-    buffer.append(data);  // Ajouter les nouvelles données au tampon
+    buffer.append(serialPort->readAll());
 
-    // Vérifier si le tampon contient le caractère de fin (ex : '\n' ou '\r\n')
     if (buffer.contains('\n')) {
-        // Convertir le tampon en QString et nettoyer les espaces inutiles
-        QString receivedData = QString::fromStdString(buffer.trimmed().toStdString());
+        QString receivedData = QString::fromUtf8(buffer).trimmed();
+        buffer.clear(); // Réinitialiser le tampon
 
-        // Nettoyer les caractères de retour chariot (\r) et de saut de ligne (\n) de l'UID
-        receivedData.replace("\r", "").replace("\n", ""); // Supprimer les caractères indésirables
+        qDebug() << "UID reçu :" << receivedData;
 
-        qDebug() << "Données brutes reçues: " << receivedData;
-
-        // Extraire l'UID (en supposant que l'UID commence après un certain préfixe ou séparateur)
-        QStringList parts = receivedData.split(":");  // Séparer le préfixe de l'UID
-        if (parts.size() > 1) {
-            QString uid = parts[1].trimmed();  // Extraire l'UID et le nettoyer
-            qDebug() << "UID extrait: " << uid;
-
-            // Normaliser l'UID (mettre en majuscules et supprimer les espaces)
-            uid = uid.trimmed();
-            uid = uid.toUpper();  // Convertir en majuscules
-
-            // Créer un tableau de correspondance UID -> ID
-            QMap<QString, QString> uidToId;
-            uidToId["23 49 BB D9"] = "001";  // Arslen
-            uidToId["1D D9 97 3F"] = "002";  // Habib
-
-            // Vérifier si l'UID est dans la liste
-            if (uidToId.contains(uid)) {
-                // Récupérer l'ID associé à l'UID
-                QString id = uidToId[uid];
-                qDebug() << "ID extrait: " << id;
-
-                // Rechercher l'ID dans la base de données pour obtenir le nom
-                QSqlQuery query;
-                query.prepare("SELECT PRENOM, NOM FROM EMPLOYES WHERE ID = :id");
-                query.bindValue(":id", id);
-
-                if (query.exec()) {
-                    if (query.next()) {
-                        QString prenom = query.value(0).toString();  // Récupérer le prénom de l'employé
-                        QString nom = query.value(1).toString();     // Récupérer le nom de l'employé
-                        QMessageBox::information(this, "Authentification réussie", "Bonjour " + prenom + " " + nom + "!");
-                        emit loginSuccessful();  // Emettre un signal de succès
-                        close();  // Fermer la fenêtre de connexion
-                    } else {
-                        QMessageBox::warning(this, "Erreur d'authentification", "UID inconnu !");
-                    }
-                } else {
-                    QMessageBox::critical(this, "Erreur", "Erreur de requête SQL : " + query.lastError().text());
-                }
-            }
-
-            // Réinitialiser le tampon pour la prochaine lecture
-            buffer.clear();
+        QString name = getEmployeeName(receivedData);
+        if (!name.isEmpty()) {
+            sendToArduino("Bonjour " + name); // Envoi du message au LCD
+            QMessageBox::information(this, "Authentification réussie", "Bonjour " + name + " !");
+            emit loginSuccessful();
+            close();
+        } else {
+            sendToArduino("UID inconnu"); // Envoi de message d'erreur
+            QMessageBox::warning(this, "Erreur", "UID inconnu !");
         }
+    }
+}
+
+QString LoginWindow::getEmployeeName(const QString &uid) {
+    QSqlQuery query;
+    query.prepare("SELECT PRENOM FROM EMPLOYES WHERE UID_ARD = :uid");
+    query.bindValue(":uid", uid);
+
+    if (query.exec() && query.next()) {
+        return query.value(0).toString(); // Retourne le prénom
+    }
+
+    return QString(); // Retourne une chaîne vide si l'UID est inconnu
+}
+
+void LoginWindow::sendToArduino(const QString &message) {
+    if (serialPort->isOpen()) {
+        serialPort->write(message.toUtf8() + '\n'); // Envoyer le message avec un saut de ligne
+    } else {
+        qDebug() << "Erreur : Port série non ouvert.";
     }
 }
