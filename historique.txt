@@ -1,5 +1,17 @@
 Historique de Ajout:
 
+[Wed. Nov 27 22:40:36] - L'utilisateur a ajouté une transaction avec Mode paiement:Virement Type:Revenue Categorie:Vente materiel montant:11
+
+[Tue. Nov 26 21:23:39] - L'utilisateur a ajouté une transaction avec Mode paiement:Virement Type:Depense Categorie:Vente materiel montant:2
+
+[Mon. Nov 18 20:49:11] - L'utilisateur a ajouté une transaction avec Mode paiement:Virement Type:Revenue Categorie:Autre revenues montant:125
+
+[Mon. Nov 18 13:59:20] - L'utilisateur a ajouté une transaction avec Mode paiement:Virement Type:Depense Categorie:Vente materiel montant:990
+
+[Mon. Nov 18 13:57:48] - L'utilisateur a ajouté une transaction avec Mode paiement:Virement Type:Revenue Categorie:Autre revenues montant:888
+
+[Mon. Nov 18 13:51:13] - L'utilisateur a ajouté une transaction avec Mode paiement:Virement Type:Revenue Categorie:Vente materiel montant:12
+
 [Mon. Nov 18 01:05:47] - L'utilisateur a ajouté une transaction avec Mode paiement:Virement Type:Depense Categorie:Vente materiel montant:1
 
 [Mon. Nov 18 00:59:11] - L'utilisateur a ajouté une transaction avec Mode paiement:Virement Type:Depense Categorie:Autre depenses montant:1245
@@ -18,6 +30,8 @@ Historique de Ajout:
 
 Historique de Modification:
 
+[Mon. Nov 18 13:54:49] - L'utilisateur a modifié la transaction n°27 pour devenir Mode paiement:Virement Type:Revenue Categorie:Vente materiel montant:12
+
 [Mon. Nov 18 01:15:20] - L'utilisateur a modifié la transaction n°19 pour devenir Mode paiement:Virement Type:Depense Categorie:Vente materiel montant:21
 
 [Mon. Nov 18 01:13:04] - L'utilisateur a modifié la transaction n°18 pour devenir Mode paiement:Cheque Type:Depense Categorie:Payement employer montant:11111
@@ -31,6 +45,12 @@ Historique de Modification:
 [Sun. Nov 17 12:37:03] - L'utilisateur a modifié la transaction n°15 pour devenir Mode paiement:Cheque Type:Depense Categorie:Autre revenues montant:300
 
 Historique de Suppression:
+
+[Wed. Nov 27 21:58:43] - L'utilisateur a supprimé la transaction n°30
+
+[Mon. Nov 18 20:56:10] - L'utilisateur a supprimé la transaction n°19
+
+[Mon. Nov 18 20:51:56] - L'utilisateur a supprimé la transaction n°25
 
 [Mon. Nov 18 01:11:56] - L'utilisateur a supprimé la transaction n°24
 
@@ -49,6 +69,16 @@ Historique de Suppression:
 [Sun. Nov 17 18:08:31] - L'utilisateur a supprimé la transaction n°20
 
 [Sun. Nov 17 17:25:10] - L'utilisateur a supprimé la transaction n°15
+
+
+
+
+
+
+
+
+
+
 
 
 

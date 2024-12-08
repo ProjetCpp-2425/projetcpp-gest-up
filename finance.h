@@ -48,6 +48,17 @@ private slots:
 
     void on_comboBox_currentIndexChanged(int index);
 
+    void on_finance_montant2_currentIndexChanged(int index);
+
+    void on_finance_id_valueChanged(int arg1);
+
+    void on_finance_date_userDateChanged(const QDate &date);
+
+
+    void on_comboBox_2_currentTextChanged(const QString &arg1);
+
+    void on_pushButton_bilan_clicked();
+
 private:
     Ui::finance *ui;
     financeop operate;

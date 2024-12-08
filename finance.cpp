@@ -6,6 +6,14 @@
 #include "ui_finance.h"
 #include <QProcess>
 
+#include "xlsxdocument.h"
+#include "xlsxchartsheet.h"
+#include "xlsxcellrange.h"
+#include "xlsxchart.h"
+#include "xlsxrichstring.h"
+#include "xlsxworkbook.h"
+using namespace QXlsx;
+
 finance::finance(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::finance)
@@ -21,11 +29,14 @@ finance::finance(QWidget *parent)
      ui->finance_table->setSelectionBehavior(QAbstractItemView::SelectRows);
      ui->update_finance->hide();
      ui->annuler->hide();
+     ui->finance_id->hide();
+     ui->finance_date->hide();
+
 
 }
 
 
-
+int index2=0;
 
 finance::~finance()
 {
@@ -123,10 +134,11 @@ void finance::on_finance_montant_textChanged(const QString &arg1)
 
 void finance::on_finance_montant_valueChanged(double arg1)
 {
+    if(index2==0){
     operate.montant=ui->finance_montant->value();
     operate.open();
    operate.displayTransactions(ui->finance_table);
-    operate.close();
+    operate.close();}
 
 }
 
@@ -213,6 +225,7 @@ void finance::on_csv_clicked()
 void finance::on_tabWidget_currentChanged(int index)
 {
     operate.open();
+    ui->comboBox_2->setCurrentIndex(0);
     int counting=operate.countTransactions();
     double depense=operate.totaldepense();
     double revenue=operate.totalrevenue();
@@ -256,7 +269,6 @@ void finance::on_tabWidget_currentChanged(int index)
 
            // Optionally, make sure the QLabel is centered
            ui->stat->setAlignment(Qt::AlignCenter);  // Centers the image in the QLabel
-
 
        // Draw the pie chart on the widget
         //PieChartWidget::drawPieChart(data, ui->stat);
@@ -305,13 +317,153 @@ void finance::on_tabWidget_currentChanged(int index)
 void finance::on_comboBox_currentIndexChanged(int index)
 {
     if(index==0)
-        operate.sort=-1;
+        operate.sort2=-1;
     else if(index==1)
-        operate.sort=3;
+        operate.sort2=3;
     else if(index==2)
-        operate.sort=4;
+        operate.sort2=4;
+    operate.open();
+    operate.displayTransactions(ui->finance_table);
+    operate.close();
+}
+
+
+void finance::on_finance_montant2_currentIndexChanged(int index)
+{
+    if(index==0){
+        ui->finance_montant->show();
+        ui->finance_id->hide();
+        ui->finance_date->hide();
+
+        ui->finance_date->setDate(QDate::fromString("02/02/2024", "dd/MM/yyyy"));
+        ui->finance_id->setValue(0);
+    }
+    else if(index==1){
+        ui->finance_montant->hide();
+        ui->finance_id->show();
+        ui->finance_date->hide();
+        ui->finance_date->setDate(QDate::fromString("02/02/2024", "dd/MM/yyyy"));
+        ui->finance_montant->setValue(0);
+    }
+    else{
+        ui->finance_montant->hide();
+        ui->finance_id->hide();
+        ui->finance_date->show();
+        ui->finance_montant->setValue(0);
+        ui->finance_id->setValue(0);
+    }
+    index2=index;
+    operate.open();
+    operate.displayTransactions(ui->finance_table);
+    operate.close();
+}
+
+
+void finance::on_finance_id_valueChanged(int arg1)
+{
+    if(index2==1){
+    operate.ID_sort=arg1;
     operate.open();
    operate.displayTransactions(ui->finance_table);
+    operate.close();}
+}
+
+
+void finance::on_finance_date_userDateChanged(const QDate &date)
+{
+    if(index2==2){
+    operate.date_sort=date;
+    operate.open();
+   operate.displayTransactions(ui->finance_table);
+    operate.close();}
+}
+
+
+
+void finance::on_comboBox_2_currentTextChanged(const QString &arg1)
+{
+    operate.open();
+    int counting=operate.countTransactions(arg1);
+    double depense=operate.totaldepense(arg1);
+    double revenue=operate.totalrevenue(arg1);
+    ui->total_nb_finance->setText(QString::number(counting));
+    double montant=revenue-depense;
+    ui->total_finance->setText(QString::number(montant));
+    ui->depense_text->setText(QString::number(depense));
+    ui->revenue_text->setText(QString::number(revenue));
     operate.close();
+}
+
+
+void finance::on_pushButton_bilan_clicked()
+{
+    operate.open();
+    QString annee=ui->comboBox_2->currentText();
+    //qDebug()<<annee;
+    int counting=operate.countTransactions(annee);
+    double depense=operate.totaldepense(annee);
+    double revenue=operate.totalrevenue(annee);
+    double montant=revenue-depense;
+    operate.close();
+    //QString annee=ui->comboBox_2->currentText();
+    int year;
+    if(annee=="Année")
+        return;
+     year=annee.toInt();
+    QString fileName = QFileDialog::getSaveFileName(nullptr, "Save Excel File", "", "*.xlsx");
+        if (fileName.isEmpty()) return;
+
+        // Open the XLSX file for writing
+        QXlsx::Document xlsx;
+
+        // Add title above the table
+        QXlsx::Format titleFormat;
+        titleFormat.setFont(QFont("Arial", 18, QFont::Bold)); // Large, bold font
+        titleFormat.setFontColor(QColor(255, 255, 255)); // White font color
+        titleFormat.setPatternBackgroundColor(QColor(0, 102, 204)); // Blue background
+        titleFormat.setHorizontalAlignment(QXlsx::Format::AlignHCenter); // Center align text
+
+        QString title = QString("Bilan Financier of year %1").arg(year);
+        xlsx.write("A1", title, titleFormat);
+
+        // Merge cells from A1 to D1
+        xlsx.mergeCells("A1:D1");
+
+        // Add some space before starting the table data
+        int currentRow = 2;
+
+        // Write column headers with styling
+        QStringList headers = {"Number of Transactions", "Total Expenses (Depense)", "Total Revenue", "Net Amount (Montant)"};
+        QXlsx::Format headerFormat;
+        headerFormat.setFont(QFont("Arial", 12, QFont::Bold)); // Set bold font
+        headerFormat.setPatternBackgroundColor(QColor(255, 87, 34)); // Orange background for headers
+        headerFormat.setFontColor(QColor(255, 255, 255)); // White text
+        headerFormat.setHorizontalAlignment(QXlsx::Format::AlignHCenter); // Center align text
+
+        for (int col = 0; col < headers.size(); ++col) {
+            xlsx.write(currentRow, col + 1, headers[col], headerFormat);
+            xlsx.setColumnWidth(col + 1, headers[col].length() + 10); // Set initial column width with padding
+        }
+
+        currentRow++; // Move to the next row for data
+
+        // Write data values with styling
+        QXlsx::Format dataFormat;
+        dataFormat.setFont(QFont("Arial", 10)); // Regular font with size 10
+        dataFormat.setPatternBackgroundColor(QColor(242, 242, 242)); // Light gray background for data cells
+        dataFormat.setHorizontalAlignment(QXlsx::Format::AlignHCenter); // Center align text
+
+        QList<QVariant> data = {counting, depense, revenue, montant};
+        for (int col = 0; col < data.size(); ++col) {
+            xlsx.write(currentRow, col + 1, data[col].toString(), dataFormat);
+            xlsx.setColumnWidth(col + 1, qMax(headers[col].length(), data[col].toString().length()) + 10); // Adjust column width
+        }
+
+        // Save the file
+        if (xlsx.saveAs(fileName)) {
+            QMessageBox::information(nullptr, "Export", "Bilan Financier exported to Excel (XLSX) successfully!");
+        } else {
+            QMessageBox::warning(nullptr, "Export Error", "Cannot write to file!");
+        }
 }
 

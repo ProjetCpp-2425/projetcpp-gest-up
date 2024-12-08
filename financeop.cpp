@@ -1,6 +1,7 @@
 #include "financeop.h"
 #include <QSqlRecord>
-
+#include "xlsxdocument.h"
+#include "xlsxformat.h"
 #include <QTableView>
 #include <QStandardItemModel>
 financeop::financeop() {
@@ -65,15 +66,21 @@ void financeop::displayTransactions(QTableView *tableView) {
                 "\"montant\" AS \"Montant\" FROM \"transaction\"");
     if(montant>=0.1)
         sql+=" WHERE \"montant\"="+QString::number(montant)+" ";
+    if(ID_sort>0)
+         sql+=" WHERE \"id-transaction\"="+QString::number(ID_sort)+" ";
+    if(date_sort!=QDate::fromString("02/02/2024", "dd/MM/yyyy"))
+         sql+=" WHERE \"date\"=  TO_DATE('" + date_sort.toString("dd/MM/yyyy") + "', 'DD/MM/YYYY') ";
+
+    if  (sort2==3)
+        sql+=" WHERE  \"type\" = 'Revenue' ";
+    else if(sort2==4)
+        sql+=" WHERE  \"type\" = 'Depense' ";
     if (sort == 1) {
             sql += " ORDER BY \"montant\" ASC"; // Sort by montant in ascending order
         } else if (sort == 2) {
             sql += " ORDER BY \"date\" ASC"; // Sort by date in ascending order
         }
-    else if (sort==3)
-        sql+=" WHERE  \"type\" = 'Revenue'";
-    else if(sort==4)
-        sql+=" WHERE  \"type\" = 'Depense'";
+
 
     QSqlQuery query(db);
     // Execute the query
@@ -173,6 +180,12 @@ bool financeop::updateTransaction(int idTransaction, const QString &modePaiement
     qDebug() << "Transaction updated successfully!";
     return true;
 }
+
+
+
+
+
+
 void financeop::exportToCSV(QTableView *tableView) {
     // Check if the table view or model is valid
     if (!tableView || !tableView->model()) {
@@ -180,56 +193,80 @@ void financeop::exportToCSV(QTableView *tableView) {
         return;
     }
 
-    // Prompt for file save location
-    QString fileName = QFileDialog::getSaveFileName(nullptr, "Save CSV File", "", "*.csv");
-    if (fileName.isEmpty()) return;
-
-    // Ensure the file has a .csv extension
-    if (!fileName.endsWith(".csv")) {
-        fileName += ".csv";
-    }
-
-    // Open file for writing
-    QFile file(fileName);
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        QMessageBox::warning(nullptr, "Export Error", "Cannot write to file!");
-        return;
-    }
-
-    QTextStream stream(&file);
+    // Get the model from the table view
     QAbstractItemModel *model = tableView->model();
 
-    // Write column headers
-    for (int col = 0; col < model->columnCount(); ++col) {
-        stream << model->headerData(col, Qt::Horizontal).toString();
-        if (col < model->columnCount() - 1) {
-            stream << ",";
-        }
-    }
-    stream << "\n";
+    // Prompt for file save location
+    QString fileName = QFileDialog::getSaveFileName(nullptr, "Save Excel File", "", "*.xlsx");
+    if (fileName.isEmpty()) return;
 
-    // Write each row of data
+    // Open the XLSX file for writing
+    QXlsx::Document xlsx;
+
+    // Add title above the table
+    QXlsx::Format titleFormat;
+    titleFormat.setFont(QFont("Arial", 18, QFont::Bold)); // Large, bold font
+    titleFormat.setFontColor(QColor(255, 255, 255)); // White font color
+    titleFormat.setPatternBackgroundColor(QColor(0, 102, 204)); // Blue background
+
+    // Write title above the table (spanning multiple columns)
+    xlsx.write("A1", "Table de Transaction", titleFormat);
+
+    // Merge cells from A1 to the last column dynamically
+    QString endColumn = QString(QChar('A' + model->columnCount() - 1)); // Calculate last column letter
+    QString range = "A1:" + endColumn + "1";  // Create merge range (e.g., A1:F1)
+    xlsx.mergeCells(range);  // Merge cells from A1 to the last column
+
+    // Add some space before starting the table data
+    int currentRow = 2;
+
+    // Write column headers with styling
+    for (int col = 0; col < model->columnCount(); ++col) {
+        QString header = model->headerData(col, Qt::Horizontal).toString();
+
+        QXlsx::Format headerFormat;
+        headerFormat.setFont(QFont("Arial", 12, QFont::Bold)); // Set bold font
+        headerFormat.setPatternBackgroundColor(QColor(255, 87, 34)); // Orange background for headers
+        headerFormat.setFontColor(QColor(255, 255, 255)); // White text
+
+        xlsx.write(currentRow, col + 1, header, headerFormat); // Write header with formatting
+
+        // Set the column width based on the longest header or data in the column
+        int maxLength = header.length();
+        for (int row = 0; row < model->rowCount(); ++row) {
+            QVariant data = model->data(model->index(row, col));
+            maxLength = qMax(maxLength, data.toString().length());
+        }
+        xlsx.setColumnWidth(col + 1, maxLength + 2); // Add some padding to fit content
+    }
+
+    currentRow++;  // Move to the next row to start writing data
+
+    // Write each row of data with styling
     for (int row = 0; row < model->rowCount(); ++row) {
         for (int col = 0; col < model->columnCount(); ++col) {
             QVariant data = model->data(model->index(row, col));
 
-            // Check if the data is a date and format it
-            if (data.type() == QVariant::Date || data.type() == QVariant::DateTime) {
-                stream << data.toDateTime().toString("yyyy-MM-dd");  // Format as needed
-            } else {
-                stream << data.toString();
-            }
+            QXlsx::Format dataFormat;
+            dataFormat.setFont(QFont("Arial", 10)); // Regular font with size 10
+            dataFormat.setPatternBackgroundColor(QColor(242, 242, 242)); // Light gray background for data cells
 
-            if (col < model->columnCount() - 1) {
-                stream << ",";
-            }
+            // Write data with formatting
+            xlsx.write(currentRow + row, col + 1, data.toString(), dataFormat);
         }
-        stream << "\n";
     }
 
-    file.close();
-    QMessageBox::information(nullptr, "Export", "Data exported to CSV successfully!");
+    // Save the file
+    if (xlsx.saveAs(fileName)) {
+        QMessageBox::information(nullptr, "Export", "Data exported to Excel (XLSX) successfully!");
+    } else {
+        QMessageBox::warning(nullptr, "Export Error", "Cannot write to file!");
+    }
 }
+
+
+
+
 int financeop::countTransactions() {
     QSqlQuery query;
     query.prepare("SELECT COUNT(*) FROM \"transaction\"");
@@ -439,6 +476,97 @@ bool financeop::depenserevenue()
     return data;
 }
 
+
+
+ int financeop::countTransactions(QString y) {
+     QSqlQuery query;
+     QString txt="SELECT * FROM \"transaction\" ";
+     if(y!="Année")
+         txt+="WHERE EXTRACT(YEAR FROM \"date\") = "+y;
+     qDebug()<<txt;
+     //query.prepare("txt");
+
+     if (!query.exec(txt)) {
+         qDebug() << "Error counting rows in transaction table:" << query.lastError().text();
+         return -1;  // Return -1 if there was an error
+     }
+    int rowCount=0;
+     while (query.next()) {
+          rowCount++;  // Return the count from the first column
+     }
+     return rowCount;
+ }
+ double financeop::totalMontant(QString y) {
+     double totalRevenue = 0.0;
+        double totalExpense = 0.0;
+
+        // Calculate total revenue
+        QSqlQuery queryRevenue;
+        queryRevenue.prepare("SELECT SUM(\"montant\") FROM \"transaction\" WHERE \"type\" = 'Revenue'");
+        if (queryRevenue.exec()) {
+            if (queryRevenue.next()) {
+                totalRevenue = queryRevenue.value(0).toDouble();
+            }
+        } else {
+            qDebug() << "Error calculating revenue:" << queryRevenue.lastError().text();
+        }
+
+        // Calculate total expense
+        QSqlQuery queryExpense;
+        queryExpense.prepare("SELECT SUM(\"montant\") FROM \"transaction\" WHERE \"type\" = 'Depense'");
+        if (queryExpense.exec()) {
+            if (queryExpense.next()) {
+                totalExpense = queryExpense.value(0).toDouble();
+            }
+        } else {
+            qDebug() << "Error calculating expense:" << queryExpense.lastError().text();
+        }
+
+        // Calculate net revenue
+        double netRevenue = totalRevenue - totalExpense;
+        return netRevenue;
+ }
+ double financeop::totaldepense(QString y)
+ {
+     double totalRevenue = 0.0;
+         // Calculate total revenue
+         QSqlQuery query;
+         QString txt;
+         if(y!="Année")
+            txt="SELECT SUM(\"montant\") FROM \"transaction\" WHERE \"type\" = 'Depense' and EXTRACT(YEAR FROM \"date\") = "+y;
+         else
+            txt="SELECT SUM(\"montant\") FROM \"transaction\" WHERE \"type\" = 'Depense'";
+         query.prepare(txt);
+         if (query.exec()) {
+             if (query.next()) {
+                 totalRevenue = query.value(0).toDouble();
+             }
+         } else {
+             qDebug() << "Error calculating total revenue:" << query.lastError().text();
+         }
+
+         return totalRevenue;
+ }
+ double financeop::totalrevenue(QString y)
+ {
+     double totalRevenue = 0.0;
+         // Calculate total revenue
+         QSqlQuery query;
+         QString txt;
+         if(y=="Année")
+         txt=("SELECT SUM(\"montant\") FROM \"transaction\" WHERE \"type\" = 'Revenue'");
+         else
+            txt= "SELECT SUM(\"montant\") FROM \"transaction\" WHERE \"type\" = 'Revenue' and EXTRACT(YEAR FROM \"date\") = "+y;
+         query.prepare(txt);
+         if (query.exec()) {
+             if (query.next()) {
+                 totalRevenue = query.value(0).toDouble();
+             }
+         } else {
+             qDebug() << "Error calculating total revenue:" << query.lastError().text();
+         }
+         return totalRevenue;
+ }
 
 
 

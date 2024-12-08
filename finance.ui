@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1751</width>
-    <height>696</height>
+    <height>752</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -91,7 +91,7 @@ color: rgb(153, 153, 153)
              <string notr="true"/>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="tab">
              <attribute name="title">
@@ -257,12 +257,8 @@ color: rgb(153, 153, 153)
                  <string>Affichage</string>
                 </property>
                 <layout class="QGridLayout" name="gridLayout">
-                 <item row="0" column="0">
-                  <widget class="QLabel" name="label_6">
-                   <property name="text">
-                    <string>Entrer le montant à rechercher </string>
-                   </property>
-                  </widget>
+                 <item row="5" column="0" colspan="4">
+                  <widget class="QTableView" name="finance_table"/>
                  </item>
                  <item row="0" column="2" colspan="2">
                   <widget class="QPushButton" name="sortdate">
@@ -271,45 +267,60 @@ color: rgb(153, 153, 153)
                    </property>
                   </widget>
                  </item>
-                 <item row="1" column="0" colspan="2">
-                  <widget class="QDoubleSpinBox" name="finance_montant">
-                   <property name="maximum">
-                    <double>99999999.989999994635582</double>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="2" colspan="2">
-                  <widget class="QPushButton" name="sortmontant">
-                   <property name="text">
-                    <string>Trier par montant</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="2" column="0" colspan="4">
-                  <widget class="QTableView" name="finance_table"/>
-                 </item>
-                 <item row="3" column="0">
+                 <item row="6" column="0">
                   <widget class="QPushButton" name="csv">
                    <property name="text">
                     <string>Exporter format Excel</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="3" column="1" colspan="2">
+                 <item row="6" column="1" colspan="2">
                   <widget class="QPushButton" name="modifier_finance">
                    <property name="text">
                     <string>Modifier</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="3" column="3">
+                 <item row="6" column="3">
                   <widget class="QPushButton" name="supprimer">
                    <property name="text">
                     <string>Supprimer</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="0" column="1">
+                 <item row="1" column="0" colspan="2">
+                  <widget class="QComboBox" name="finance_montant2">
+                   <item>
+                    <property name="text">
+                     <string>Montant</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>ID</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>Date</string>
+                    </property>
+                   </item>
+                  </widget>
+                 </item>
+                 <item row="3" column="0" colspan="2">
+                  <widget class="QSpinBox" name="finance_id"/>
+                 </item>
+                 <item row="2" column="0" colspan="2">
+                  <widget class="QDoubleSpinBox" name="finance_montant">
+                   <property name="maximum">
+                    <double>99999999.989999994635582</double>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="0" colspan="2">
+                  <widget class="QDateEdit" name="finance_date"/>
+                 </item>
+                 <item row="0" column="0" colspan="2">
                   <widget class="QComboBox" name="comboBox">
                    <item>
                     <property name="text">
@@ -326,6 +337,13 @@ color: rgb(153, 153, 153)
                      <string>Depense</string>
                     </property>
                    </item>
+                  </widget>
+                 </item>
+                 <item row="1" column="2" colspan="2">
+                  <widget class="QPushButton" name="sortmontant">
+                   <property name="text">
+                    <string>Trier par montant</string>
+                   </property>
                   </widget>
                  </item>
                 </layout>
@@ -357,16 +375,169 @@ color: rgb(153, 153, 153)
               <item>
                <layout class="QVBoxLayout" name="verticalLayout_3">
                 <item>
-                 <widget class="QLabel" name="label_7">
-                  <property name="font">
-                   <font>
-                    <pointsize>12</pointsize>
-                   </font>
+                 <layout class="QHBoxLayout" name="horizontalLayout_14">
+                  <property name="topMargin">
+                   <number>0</number>
                   </property>
-                  <property name="text">
-                   <string>Résultat financiére</string>
-                  </property>
-                 </widget>
+                  <item>
+                   <widget class="QLabel" name="label_7">
+                    <property name="font">
+                     <font>
+                      <pointsize>12</pointsize>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>Résultat financiére</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QComboBox" name="comboBox_2">
+                    <item>
+                     <property name="text">
+                      <string>Année</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>2025</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>2024</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>2023</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>2022</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>2021</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>2020</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>2019</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>2018</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>2017</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>2016</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>2015</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>2014</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>2013</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>2012</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>2011</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>2010</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>2009</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>2008</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>2007</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>2006</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>2005</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>2004</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>2003</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>2002</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>2001</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>2000</string>
+                     </property>
+                    </item>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="pushButton_bilan">
+                    <property name="text">
+                     <string>Excel</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
                 </item>
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_10">
