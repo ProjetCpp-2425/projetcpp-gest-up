@@ -44,31 +44,28 @@ LoginWindow::~LoginWindow() {
 
 void LoginWindow::connectToDatabase() {
     db = QSqlDatabase::addDatabase("QODBC");
-    db.setDatabaseName("nom_de_votre_source_odbc"); // Remplacez par votre source ODBC
-    db.setUserName("votre_utilisateur");
-    db.setPassword("votre_mot_de_passe");
+    db.setDatabaseName("PROJET"); // Remplacez par votre source ODBC
+    db.setUserName("projetcpp2a30");
+    db.setPassword("esprit24");
 
     if (!db.open()) {
         QMessageBox::critical(this, "Erreur", "Impossible de se connecter à la base de données.\n" + db.lastError().text());
     }
 }
 
-void LoginWindow::onLoginClicked() {
+void LoginWindow::onLoginClicked()
+{
     QString username = ui->usernameLineEdit->text();
     QString password = ui->passwordLineEdit->text();
 
-    QSqlQuery query;
-    query.prepare("SELECT * FROM EMPLOYES WHERE USERNAME = :username AND PASSWORD = :password");
-    query.bindValue(":username", username);
-    query.bindValue(":password", password);
-
-    if (query.exec() && query.next()) {
-        emit loginSuccessful(); // Connexion réussie
-        close(); // Fermer la fenêtre de connexion
+    if(username == "a" && password == "a") {
+        emit loginSuccessful();  // Emettre un signal de succès
+        close();  // Fermer la fenêtre de connexion
     } else {
-        QMessageBox::critical(this, "Erreur", "Nom d'utilisateur ou mot de passe incorrect.");
+        QMessageBox::critical(this, "Login Failed", "Incorrect username or password.");
     }
 }
+
 
 void LoginWindow::togglePasswordVisibility() {
     if (ui->passwordLineEdit->echoMode() == QLineEdit::Password) {

@@ -52,7 +52,7 @@ color: #000000; /* Ajustez la couleur du texte selon vos besoins */
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap>../../../OneDrive/Desktop/Capture d'écran 2024-10-04 104843.png</pixmap>
+    <pixmap resource="image.qrc">:/img/img/2.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -150,6 +150,8 @@ color: #000000; /* Ajustez la couleur du texte selon vos besoins */
   <zorder>label_2</zorder>
   <zorder>togglePasswordButton</zorder>
  </widget>
- <resources/>
+ <resources>
+  <include location="image.qrc"/>
+ </resources>
  <connections/>
 </ui>
