@@ -9,6 +9,7 @@
 #include <QSerialPortInfo>
 #include <QSerialPort>
 #include "seriallink.h"
+#include "EMAILSENDER.h"
 
 namespace Ui {
 class MainWindow;
@@ -50,7 +51,7 @@ private slots:
     void on_sendCommandButton_clicked();
     void listAvailablePorts();
     void processData(const QString &data);
-
+    void on_sendButton_clicked();
 
 
 

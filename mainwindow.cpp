@@ -23,10 +23,12 @@
 #include <QDateTime>
 #include <QRegularExpression>
 #include <QRegularExpressionValidator>
-#include "smtp.h"
+#include "EMAILSENDER.h"
 #include <QRegularExpression>
 #include <QSerialPortInfo>
 #include <QSerialPort>
+#include "EMAILSENDER.h"
+
 using namespace QrCodegen;
 QString days="";
 using namespace std;
@@ -42,12 +44,9 @@ Smtp* smtp = nullptr;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow), serial(new seriallink(this))
+    , ui(new Ui::MainWindow), serial(new seriallink(this)) ,emailSender(new EMAILSENDER(this))
 {
     ui->setupUi(this);
-    Smtp *smtp = new Smtp("asmaabdellatif11@gmail.com", "bts2004army", "smtp.gmail.com", 465);
-
-    connect(smtp, &Smtp::status, this, &MainWindow::onEmailStatusReceived);
 
     // Champ date et heure (DateTimeEdit)
     ui->dateTimeEdit->setDisplayFormat("yyyy-MM-dd HH:mm:ss");  // Format souhaité pour l'affichage
@@ -716,4 +715,14 @@ void MainWindow::listAvailablePorts() {
         << ", Description:" << info.description()
         << ", Manufacturer:" << info.manufacturer();
     }
+}
+void MainWindow::on_sendButton_clicked()
+{
+    // Récupérer les informations saisies dans les champs
+    QString recipient = ui->lineEditRecipient->text();   // Email du destinataire
+    QString subject = ui->lineEditSubject->text();       // Sujet de l'email
+    QString message = ui->textEditMessage->toPlainText(); // Contenu de l'email
+
+    // Appeler la méthode pour envoyer l'email
+    emailSender->sendEmail(recipient, subject, message);
 }

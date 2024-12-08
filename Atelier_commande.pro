@@ -31,19 +31,19 @@ CONFIG += c++11
 
 
 SOURCES += \
+    EMAILSENDER.cpp \
     commande.cpp \
         main.cpp \
         mainwindow.cpp \
     connection.cpp \
-    qrcode.cpp \
-    smtp.cpp
+    qrcode.cpp
 
 HEADERS += \
+    EMAILSENDER.h \
     commande.h \
         mainwindow.h \
     connection.h \
-    qrcode.h \
-    smtp.h
+    qrcode.h
 
 FORMS += \
         mainwindow.ui
