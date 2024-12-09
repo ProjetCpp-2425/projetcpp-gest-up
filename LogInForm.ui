@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>LoginForm</class>
+ <widget class="QMainWindow" name="LoginForm">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>230</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>300</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>400</width>
+    <height>230</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>School Database</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QVBoxLayout" name="verticalLayout_3">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+    background-color: #3d3d3d;  /* Dark background */
+    color: #ffffff;  /* White text */
+    border: 3px solid #da532c;  /* Orange border */
+    border-radius: 5px;  /* Rounded corners */
+    padding: 5px;
+}</string>
+        </property>
+        <property name="text">
+         <string>Login</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QLabel" name="label_2">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Enter Username:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="editLogin">
+        <property name="toolTip">
+         <string/>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">/* QLineEdit Styling */
+QLineEdit {
+    background-color: #3d3d3d;  /* Dark background */
+    color: #ffffff;  /* White text */
+    border: 3px solid #da532c;  /* Orange border */
+    border-radius: 5px;  /* Rounded corners */
+    padding: 5px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;  /* Smooth transition for background and border */
+}
+
+/* Hover and Focus Effects */
+QLineEdit:hover {
+    background-color: #2d89ef;  /* Blue background on hover/focus */
+    border-color: #2d89ef;  /* Blue border on hover/focus */
+}
+
+/* Disabled State */
+QLineEdit:disabled {
+    background-color: #2b2b2b;  /* Darker background for disabled */
+    color: #aaaaaa;  /* Gray text when disabled */
+    border-color: #555555;  /* Lighter border when disabled */
+}
+</string>
+        </property>
+        <property name="maxLength">
+         <number>24</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QLabel" name="label_3">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Enter Password:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="editPassword">
+        <property name="styleSheet">
+         <string notr="true">/* QLineEdit Styling */
+QLineEdit {
+    background-color: #3d3d3d;  /* Dark background */
+    color: #ffffff;  /* White text */
+    border: 3px solid #da532c;  /* Orange border */
+    border-radius: 5px;  /* Rounded corners */
+    padding: 5px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;  /* Smooth transition for background and border */
+}
+
+/* Hover and Focus Effects */
+QLineEdit:hover {
+    background-color: #2d89ef;  /* Blue background on hover/focus */
+    border-color: #2d89ef;  /* Blue border on hover/focus */
+}
+
+/* Disabled State */
+QLineEdit:disabled {
+    background-color: #2b2b2b;  /* Darker background for disabled */
+    color: #aaaaaa;  /* Gray text when disabled */
+    border-color: #555555;  /* Lighter border when disabled */
+}
+</string>
+        </property>
+        <property name="maxLength">
+         <number>24</number>
+        </property>
+        <property name="echoMode">
+         <enum>QLineEdit::Password</enum>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QCheckBox" name="cbxShowPassword">
+      <property name="toolTip">
+       <string extracomment="Enable this option to show the password"/>
+      </property>
+      <property name="text">
+       <string>Show Password</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QPushButton" name="pushButton">
+        <property name="styleSheet">
+         <string notr="true">/* QPushButton Styling */
+QPushButton {
+    border-style: solid;
+    background-color: #3d3d3d;  /* Same dark background */
+    color: #fff;  /* White text */
+    border-radius: 7px;  /* Rounded corners */
+    border-width: 2px;  /* Set border width */
+    border-color: #da532c;  /* Orange border */
+    padding: 8px 15px;  /* Padding for button spacing */
+    outline: none; /* Remove default focus outline */
+}
+
+/* Hover effect */
+QPushButton:hover {
+    color: #ccc;  /* Light gray text on hover */
+    background-color: qlineargradient(spread:pad, x1:0.517, y1:0, x2:0.517, y2:1, stop:0 rgba(45, 45, 45, 255), stop:0.505682 rgba(45, 45, 45, 255), stop:1 rgba(29, 29, 29, 255));  /* Darker background */
+    border-color: #2d89ef;  /* Blue border on hover */
+}
+
+/* Pressed/Clicked effect (with border unchanged) */
+QPushButton:pressed {
+    background-color: qlineargradient(spread:pad, x1:0.517, y1:0, x2:0.517, y2:1, stop:0 rgba(29, 29, 29, 255), stop:0.505682 rgba(45, 45, 45, 255), stop:1 rgba(29, 29, 29, 255));  /* Darker background on press */
+    border-color: #da532c;  /* Keep the orange border when pressed */
+    border-width: 2px;  /* Keep the border width */
+}
+
+/* Focus effect */
+QPushButton:focus {
+    background-color: #18465d;  /* Dark blue background on focus */
+    color: #ffffff;  /* White text on focus */
+    border-color: #18465d;  /* Blue border on focus */
+}
+
+/* Checked/Pressed button stays in this state */
+QPushButton:checked {
+    background-color: #76797C;  /* Grayish background when checked */
+    border-color: #6A6969;  /* Gray border when checked */
+    color: #ffffff;  /* White text when checked */
+}
+
+/* Disabled Button */
+QPushButton:disabled {
+    background-color: #2b2b2b;  /* Darker background for disabled button */
+    color: #aaaaaa;  /* Gray text when disabled */
+    border-color: #555555;  /* Lighter border when disabled */
+}
+</string>
+        </property>
+        <property name="text">
+         <string>Forget Password</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnLogin">
+        <property name="minimumSize">
+         <size>
+          <width>200</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string extracomment="Click this button to log in"/>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">/* QPushButton Styling */
+QPushButton {
+    border-style: solid;
+    background-color: #3d3d3d;  /* Same dark background */
+    color: #fff;  /* White text */
+    border-radius: 7px;  /* Rounded corners */
+    border-width: 2px;  /* Set border width */
+    border-color: #da532c;  /* Orange border */
+    padding: 8px 15px;  /* Padding for button spacing */
+    outline: none; /* Remove default focus outline */
+}
+
+/* Hover effect */
+QPushButton:hover {
+    color: #ccc;  /* Light gray text on hover */
+    background-color: qlineargradient(spread:pad, x1:0.517, y1:0, x2:0.517, y2:1, stop:0 rgba(45, 45, 45, 255), stop:0.505682 rgba(45, 45, 45, 255), stop:1 rgba(29, 29, 29, 255));  /* Darker background */
+    border-color: #2d89ef;  /* Blue border on hover */
+}
+
+/* Pressed/Clicked effect (with border unchanged) */
+QPushButton:pressed {
+    background-color: qlineargradient(spread:pad, x1:0.517, y1:0, x2:0.517, y2:1, stop:0 rgba(29, 29, 29, 255), stop:0.505682 rgba(45, 45, 45, 255), stop:1 rgba(29, 29, 29, 255));  /* Darker background on press */
+    border-color: #da532c;  /* Keep the orange border when pressed */
+    border-width: 2px;  /* Keep the border width */
+}
+
+/* Focus effect */
+QPushButton:focus {
+    background-color: #18465d;  /* Dark blue background on focus */
+    color: #ffffff;  /* White text on focus */
+    border-color: #18465d;  /* Blue border on focus */
+}
+
+/* Checked/Pressed button stays in this state */
+QPushButton:checked {
+    background-color: #76797C;  /* Grayish background when checked */
+    border-color: #6A6969;  /* Gray border when checked */
+    color: #ffffff;  /* White text when checked */
+}
+
+/* Disabled Button */
+QPushButton:disabled {
+    background-color: #2b2b2b;  /* Darker background for disabled button */
+    color: #aaaaaa;  /* Gray text when disabled */
+    border-color: #555555;  /* Lighter border when disabled */
+}
+</string>
+        </property>
+        <property name="text">
+         <string>Login</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_2"/>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

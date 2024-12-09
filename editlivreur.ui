@@ -1,0 +1,714 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>EditLivreur</class>
+ <widget class="QDialog" name="EditLivreur">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>357</width>
+    <height>478</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog {
+    background-color: #2b2b2b;  /* Dark background */
+    color: #ffffff;  /* White text */
+    border-radius: 10px;  /* Rounded corners */
+    border: 2px solid #00ff00;  /* Green border */
+    padding: 15px;  /* Internal padding */
+}</string>
+  </property>
+  <widget class="QLineEdit" name="telephoneLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>230</y>
+     <width>171</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">/* QLineEdit Styling */
+QLineEdit {
+    border-style: solid;
+    background-color: #f2f2f2;  /* Light gray background */
+    color: #333333;  /* Dark gray text for readability */
+    border-radius: 10px;  /* Smooth, rounded corners */
+    border-width: 1px;  /* Thin border */
+    border-color: #cccccc;  /* Soft gray border */
+    padding: 8px;  /* Comfortable padding inside the line edit */
+    outline: none; /* Remove default focus outline */
+    selection-background-color: #0066cc; /* Soft blue selection background */
+    selection-color: #ffffff; /* White text for selection */
+    font-size: 14px;  /* Slightly larger font for better readability */
+}
+
+/* Hover effect */
+QLineEdit:hover {
+    background-color: #e6e6e6;  /* Slightly darker light gray on hover */
+    border-color: #999999;  /* Darker gray border on hover */
+}
+
+/* Focused effect (when the user clicks into the QLineEdit) */
+QLineEdit:focus {
+    background-color: #ffffff;  /* Bright white background for focus */
+    border-color: #007acc;  /* Bold blue border when focused */
+}
+
+/* Disabled QLineEdit */
+QLineEdit:disabled {
+    background-color: #e0e0e0;  /* Light gray background for disabled state */
+    color: #777777;  /* Medium gray text when disabled */
+    border-color: #d0d0d0;  /* Light gray border when disabled */
+}
+</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="idLivreurLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>130</y>
+     <width>171</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">/* QLineEdit Styling */
+QLineEdit {
+    border-style: solid;
+    background-color: #f2f2f2;  /* Light gray background */
+    color: #333333;  /* Dark gray text for readability */
+    border-radius: 10px;  /* Smooth, rounded corners */
+    border-width: 1px;  /* Thin border */
+    border-color: #cccccc;  /* Soft gray border */
+    padding: 8px;  /* Comfortable padding inside the line edit */
+    outline: none; /* Remove default focus outline */
+    selection-background-color: #0066cc; /* Soft blue selection background */
+    selection-color: #ffffff; /* White text for selection */
+    font-size: 14px;  /* Slightly larger font for better readability */
+}
+
+/* Hover effect */
+QLineEdit:hover {
+    background-color: #e6e6e6;  /* Slightly darker light gray on hover */
+    border-color: #999999;  /* Darker gray border on hover */
+}
+
+/* Focused effect (when the user clicks into the QLineEdit) */
+QLineEdit:focus {
+    background-color: #ffffff;  /* Bright white background for focus */
+    border-color: #007acc;  /* Bold blue border when focused */
+}
+
+/* Disabled QLineEdit */
+QLineEdit:disabled {
+    background-color: #e0e0e0;  /* Light gray background for disabled state */
+    color: #777777;  /* Medium gray text when disabled */
+    border-color: #d0d0d0;  /* Light gray border when disabled */
+}
+</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>130</y>
+     <width>111</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">/* QLabel Styling */
+QLabel {
+    background-color: #ffffff;  /* Clean white background */
+    color: #333333;  /* Dark gray text for readability */
+    border-radius: 8px;  /* Smooth, rounded corners */
+    border-width: 1px;  /* Thin border */
+    border-style: solid;
+    border-color: #cccccc;  /* Soft gray border */
+    padding: 6px 10px;  /* Comfortable padding around the label */
+    margin: 5px;  /* Slight margin around the label */
+    font-size: 14px;  /* Larger font for readability */
+    font-weight: 500;  /* Medium font weight for emphasis */
+}
+
+/* Hover effect */
+QLabel:hover {
+    background-color: #f7f7f7;  /* Slightly darker white on hover */
+    border-color: #999999;  /* Darker gray border on hover */
+}
+
+/* Disabled QLabel */
+QLabel:disabled {
+    background-color: #f0f0f0;  /* Light gray for disabled state */
+    color: #aaaaaa;  /* Light gray text when disabled */
+    border-color: #dcdcdc;  /* Very light gray border for disabled state */
+}
+</string>
+   </property>
+   <property name="text">
+    <string>ID</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>30</y>
+     <width>111</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">/* QLabel Styling */
+QLabel {
+    background-color: #ffffff;  /* Clean white background */
+    color: #333333;  /* Dark gray text for readability */
+    border-radius: 8px;  /* Smooth, rounded corners */
+    border-width: 1px;  /* Thin border */
+    border-style: solid;
+    border-color: #cccccc;  /* Soft gray border */
+    padding: 6px 10px;  /* Comfortable padding around the label */
+    margin: 5px;  /* Slight margin around the label */
+    font-size: 14px;  /* Larger font for readability */
+    font-weight: 500;  /* Medium font weight for emphasis */
+}
+
+/* Hover effect */
+QLabel:hover {
+    background-color: #f7f7f7;  /* Slightly darker white on hover */
+    border-color: #999999;  /* Darker gray border on hover */
+}
+
+/* Disabled QLabel */
+QLabel:disabled {
+    background-color: #f0f0f0;  /* Light gray for disabled state */
+    color: #aaaaaa;  /* Light gray text when disabled */
+    border-color: #dcdcdc;  /* Very light gray border for disabled state */
+}
+</string>
+   </property>
+   <property name="text">
+    <string>nom</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="adresseLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>280</y>
+     <width>171</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">/* QLineEdit Styling */
+QLineEdit {
+    border-style: solid;
+    background-color: #f2f2f2;  /* Light gray background */
+    color: #333333;  /* Dark gray text for readability */
+    border-radius: 10px;  /* Smooth, rounded corners */
+    border-width: 1px;  /* Thin border */
+    border-color: #cccccc;  /* Soft gray border */
+    padding: 8px;  /* Comfortable padding inside the line edit */
+    outline: none; /* Remove default focus outline */
+    selection-background-color: #0066cc; /* Soft blue selection background */
+    selection-color: #ffffff; /* White text for selection */
+    font-size: 14px;  /* Slightly larger font for better readability */
+}
+
+/* Hover effect */
+QLineEdit:hover {
+    background-color: #e6e6e6;  /* Slightly darker light gray on hover */
+    border-color: #999999;  /* Darker gray border on hover */
+}
+
+/* Focused effect (when the user clicks into the QLineEdit) */
+QLineEdit:focus {
+    background-color: #ffffff;  /* Bright white background for focus */
+    border-color: #007acc;  /* Bold blue border when focused */
+}
+
+/* Disabled QLineEdit */
+QLineEdit:disabled {
+    background-color: #e0e0e0;  /* Light gray background for disabled state */
+    color: #777777;  /* Medium gray text when disabled */
+    border-color: #d0d0d0;  /* Light gray border when disabled */
+}
+</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>330</y>
+     <width>111</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">/* QLabel Styling */
+QLabel {
+    background-color: #ffffff;  /* Clean white background */
+    color: #333333;  /* Dark gray text for readability */
+    border-radius: 8px;  /* Smooth, rounded corners */
+    border-width: 1px;  /* Thin border */
+    border-style: solid;
+    border-color: #cccccc;  /* Soft gray border */
+    padding: 6px 10px;  /* Comfortable padding around the label */
+    margin: 5px;  /* Slight margin around the label */
+    font-size: 14px;  /* Larger font for readability */
+    font-weight: 500;  /* Medium font weight for emphasis */
+}
+
+/* Hover effect */
+QLabel:hover {
+    background-color: #f7f7f7;  /* Slightly darker white on hover */
+    border-color: #999999;  /* Darker gray border on hover */
+}
+
+/* Disabled QLabel */
+QLabel:disabled {
+    background-color: #f0f0f0;  /* Light gray for disabled state */
+    color: #aaaaaa;  /* Light gray text when disabled */
+    border-color: #dcdcdc;  /* Very light gray border for disabled state */
+}
+</string>
+   </property>
+   <property name="text">
+    <string>Total livraison</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="nomLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>30</y>
+     <width>171</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">/* QLineEdit Styling */
+QLineEdit {
+    border-style: solid;
+    background-color: #f2f2f2;  /* Light gray background */
+    color: #333333;  /* Dark gray text for readability */
+    border-radius: 10px;  /* Smooth, rounded corners */
+    border-width: 1px;  /* Thin border */
+    border-color: #cccccc;  /* Soft gray border */
+    padding: 8px;  /* Comfortable padding inside the line edit */
+    outline: none; /* Remove default focus outline */
+    selection-background-color: #0066cc; /* Soft blue selection background */
+    selection-color: #ffffff; /* White text for selection */
+    font-size: 14px;  /* Slightly larger font for better readability */
+}
+
+/* Hover effect */
+QLineEdit:hover {
+    background-color: #e6e6e6;  /* Slightly darker light gray on hover */
+    border-color: #999999;  /* Darker gray border on hover */
+}
+
+/* Focused effect (when the user clicks into the QLineEdit) */
+QLineEdit:focus {
+    background-color: #ffffff;  /* Bright white background for focus */
+    border-color: #007acc;  /* Bold blue border when focused */
+}
+
+/* Disabled QLineEdit */
+QLineEdit:disabled {
+    background-color: #e0e0e0;  /* Light gray background for disabled state */
+    color: #777777;  /* Medium gray text when disabled */
+    border-color: #d0d0d0;  /* Light gray border when disabled */
+}
+</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>80</y>
+     <width>111</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">/* QLabel Styling */
+QLabel {
+    background-color: #ffffff;  /* Clean white background */
+    color: #333333;  /* Dark gray text for readability */
+    border-radius: 8px;  /* Smooth, rounded corners */
+    border-width: 1px;  /* Thin border */
+    border-style: solid;
+    border-color: #cccccc;  /* Soft gray border */
+    padding: 6px 10px;  /* Comfortable padding around the label */
+    margin: 5px;  /* Slight margin around the label */
+    font-size: 14px;  /* Larger font for readability */
+    font-weight: 500;  /* Medium font weight for emphasis */
+}
+
+/* Hover effect */
+QLabel:hover {
+    background-color: #f7f7f7;  /* Slightly darker white on hover */
+    border-color: #999999;  /* Darker gray border on hover */
+}
+
+/* Disabled QLabel */
+QLabel:disabled {
+    background-color: #f0f0f0;  /* Light gray for disabled state */
+    color: #aaaaaa;  /* Light gray text when disabled */
+    border-color: #dcdcdc;  /* Very light gray border for disabled state */
+}
+</string>
+   </property>
+   <property name="text">
+    <string>prenom</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_6">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>230</y>
+     <width>111</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">/* QLabel Styling */
+QLabel {
+    background-color: #ffffff;  /* Clean white background */
+    color: #333333;  /* Dark gray text for readability */
+    border-radius: 8px;  /* Smooth, rounded corners */
+    border-width: 1px;  /* Thin border */
+    border-style: solid;
+    border-color: #cccccc;  /* Soft gray border */
+    padding: 6px 10px;  /* Comfortable padding around the label */
+    margin: 5px;  /* Slight margin around the label */
+    font-size: 14px;  /* Larger font for readability */
+    font-weight: 500;  /* Medium font weight for emphasis */
+}
+
+/* Hover effect */
+QLabel:hover {
+    background-color: #f7f7f7;  /* Slightly darker white on hover */
+    border-color: #999999;  /* Darker gray border on hover */
+}
+
+/* Disabled QLabel */
+QLabel:disabled {
+    background-color: #f0f0f0;  /* Light gray for disabled state */
+    color: #aaaaaa;  /* Light gray text when disabled */
+    border-color: #dcdcdc;  /* Very light gray border for disabled state */
+}
+</string>
+   </property>
+   <property name="text">
+    <string>Telephone</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="totalLivraisonsLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>330</y>
+     <width>171</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">/* QLineEdit Styling */
+QLineEdit {
+    border-style: solid;
+    background-color: #f2f2f2;  /* Light gray background */
+    color: #333333;  /* Dark gray text for readability */
+    border-radius: 10px;  /* Smooth, rounded corners */
+    border-width: 1px;  /* Thin border */
+    border-color: #cccccc;  /* Soft gray border */
+    padding: 8px;  /* Comfortable padding inside the line edit */
+    outline: none; /* Remove default focus outline */
+    selection-background-color: #0066cc; /* Soft blue selection background */
+    selection-color: #ffffff; /* White text for selection */
+    font-size: 14px;  /* Slightly larger font for better readability */
+}
+
+/* Hover effect */
+QLineEdit:hover {
+    background-color: #e6e6e6;  /* Slightly darker light gray on hover */
+    border-color: #999999;  /* Darker gray border on hover */
+}
+
+/* Focused effect (when the user clicks into the QLineEdit) */
+QLineEdit:focus {
+    background-color: #ffffff;  /* Bright white background for focus */
+    border-color: #007acc;  /* Bold blue border when focused */
+}
+
+/* Disabled QLineEdit */
+QLineEdit:disabled {
+    background-color: #e0e0e0;  /* Light gray background for disabled state */
+    color: #777777;  /* Medium gray text when disabled */
+    border-color: #d0d0d0;  /* Light gray border when disabled */
+}
+</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="prenomLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>80</y>
+     <width>171</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">/* QLineEdit Styling */
+QLineEdit {
+    border-style: solid;
+    background-color: #f2f2f2;  /* Light gray background */
+    color: #333333;  /* Dark gray text for readability */
+    border-radius: 10px;  /* Smooth, rounded corners */
+    border-width: 1px;  /* Thin border */
+    border-color: #cccccc;  /* Soft gray border */
+    padding: 8px;  /* Comfortable padding inside the line edit */
+    outline: none; /* Remove default focus outline */
+    selection-background-color: #0066cc; /* Soft blue selection background */
+    selection-color: #ffffff; /* White text for selection */
+    font-size: 14px;  /* Slightly larger font for better readability */
+}
+
+/* Hover effect */
+QLineEdit:hover {
+    background-color: #e6e6e6;  /* Slightly darker light gray on hover */
+    border-color: #999999;  /* Darker gray border on hover */
+}
+
+/* Focused effect (when the user clicks into the QLineEdit) */
+QLineEdit:focus {
+    background-color: #ffffff;  /* Bright white background for focus */
+    border-color: #007acc;  /* Bold blue border when focused */
+}
+
+/* Disabled QLineEdit */
+QLineEdit:disabled {
+    background-color: #e0e0e0;  /* Light gray background for disabled state */
+    color: #777777;  /* Medium gray text when disabled */
+    border-color: #d0d0d0;  /* Light gray border when disabled */
+}
+</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_7">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>280</y>
+     <width>111</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">/* QLabel Styling */
+QLabel {
+    background-color: #ffffff;  /* Clean white background */
+    color: #333333;  /* Dark gray text for readability */
+    border-radius: 8px;  /* Smooth, rounded corners */
+    border-width: 1px;  /* Thin border */
+    border-style: solid;
+    border-color: #cccccc;  /* Soft gray border */
+    padding: 6px 10px;  /* Comfortable padding around the label */
+    margin: 5px;  /* Slight margin around the label */
+    font-size: 14px;  /* Larger font for readability */
+    font-weight: 500;  /* Medium font weight for emphasis */
+}
+
+/* Hover effect */
+QLabel:hover {
+    background-color: #f7f7f7;  /* Slightly darker white on hover */
+    border-color: #999999;  /* Darker gray border on hover */
+}
+
+/* Disabled QLabel */
+QLabel:disabled {
+    background-color: #f0f0f0;  /* Light gray for disabled state */
+    color: #aaaaaa;  /* Light gray text when disabled */
+    border-color: #dcdcdc;  /* Very light gray border for disabled state */
+}
+</string>
+   </property>
+   <property name="text">
+    <string>Adresse</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="cancelbutton">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>400</y>
+     <width>91</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>50</width>
+     <height>30</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">/* QPushButton Styling */
+QPushButton {
+    border-style: solid;
+    background-color: #3d3d3d;  /* Same dark background */
+    color: #fff;  /* White text */
+    border-radius: 7px;  /* Rounded corners */
+    border-width: 2px;  /* Set border width */
+    border-color: #00ff00;  /* Orange border */
+    padding: 8px 15px;  /* Padding for button spacing */
+    outline: none; /* Remove default focus outline */
+}
+
+/* Hover effect */
+QPushButton:hover {
+    color: #ccc;  /* Light gray text on hover */
+    background-color: qlineargradient(spread:pad, x1:0.517, y1:0, x2:0.517, y2:1, stop:0 rgba(45, 45, 45, 255), stop:0.505682 rgba(45, 45, 45, 255), stop:1 rgba(29, 29, 29, 255));  /* Darker background */
+    border-color: #2d89ef;  /* Blue border on hover */
+}
+
+/* Pressed/Clicked effect (with border unchanged) */
+QPushButton:pressed {
+    background-color: qlineargradient(spread:pad, x1:0.517, y1:0, x2:0.517, y2:1, stop:0 rgba(29, 29, 29, 255), stop:0.505682 rgba(45, 45, 45, 255), stop:1 rgba(29, 29, 29, 255));  /* Darker background on press */
+    border-color: #da532c;  /* Keep the orange border when pressed */
+    border-width: 2px;  /* Keep the border width */
+}
+
+/* Focus effect */
+QPushButton:focus {
+    background-color: #18465d;  /* Dark blue background on focus */
+    color: #ffffff;  /* White text on focus */
+    border-color: #18465d;  /* Blue border on focus */
+}
+
+/* Checked/Pressed button stays in this state */
+QPushButton:checked {
+    background-color: #76797C;  /* Grayish background when checked */
+    border-color: #6A6969;  /* Gray border when checked */
+    color: #ffffff;  /* White text when checked */
+}
+
+/* Disabled Button */
+QPushButton:disabled {
+    background-color: #2b2b2b;  /* Darker background for disabled button */
+    color: #aaaaaa;  /* Gray text when disabled */
+    border-color: #555555;  /* Lighter border when disabled */
+}
+</string>
+   </property>
+   <property name="text">
+    <string>CANCEL</string>
+   </property>
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="autoExclusive">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="okbutton">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>400</y>
+     <width>81</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>50</width>
+     <height>30</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">/* QPushButton Styling */
+QPushButton {
+    border-style: solid;
+    background-color: #3d3d3d;  /* Same dark background */
+    color: #fff;  /* White text */
+    border-radius: 7px;  /* Rounded corners */
+    border-width: 2px;  /* Set border width */
+    border-color: #00ff00;  /* Orange border */
+    padding: 8px 15px;  /* Padding for button spacing */
+    outline: none; /* Remove default focus outline */
+}
+
+/* Hover effect */
+QPushButton:hover {
+    color: #ccc;  /* Light gray text on hover */
+    background-color: qlineargradient(spread:pad, x1:0.517, y1:0, x2:0.517, y2:1, stop:0 rgba(45, 45, 45, 255), stop:0.505682 rgba(45, 45, 45, 255), stop:1 rgba(29, 29, 29, 255));  /* Darker background */
+    border-color: #2d89ef;  /* Blue border on hover */
+}
+
+/* Pressed/Clicked effect (with border unchanged) */
+QPushButton:pressed {
+    background-color: qlineargradient(spread:pad, x1:0.517, y1:0, x2:0.517, y2:1, stop:0 rgba(29, 29, 29, 255), stop:0.505682 rgba(45, 45, 45, 255), stop:1 rgba(29, 29, 29, 255));  /* Darker background on press */
+    border-color: #da532c;  /* Keep the orange border when pressed */
+    border-width: 2px;  /* Keep the border width */
+}
+
+/* Focus effect */
+QPushButton:focus {
+    background-color: #18465d;  /* Dark blue background on focus */
+    color: #ffffff;  /* White text on focus */
+    border-color: #18465d;  /* Blue border on focus */
+}
+
+/* Checked/Pressed button stays in this state */
+QPushButton:checked {
+    background-color: #76797C;  /* Grayish background when checked */
+    border-color: #6A6969;  /* Gray border when checked */
+    color: #ffffff;  /* White text when checked */
+}
+
+/* Disabled Button */
+QPushButton:disabled {
+    background-color: #2b2b2b;  /* Darker background for disabled button */
+    color: #aaaaaa;  /* Gray text when disabled */
+    border-color: #555555;  /* Lighter border when disabled */
+}
+</string>
+   </property>
+   <property name="text">
+    <string>OK</string>
+   </property>
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="autoExclusive">
+    <bool>true</bool>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
